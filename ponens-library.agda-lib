@@ -1,0 +1,5 @@
+name: ponens-library-0.0.1
+depend: standard-library
+include: src
+flags:
+  --warning=noUnsupportedIndexedMatch
