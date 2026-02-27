@@ -38,8 +38,7 @@ To judge whether the set of operations is complete, we compare operations to oth
 - Haskell's `Data.Set`.
 - Rocq's [Stdlib.FSets.FSets](https://rocq-prover.org/doc/V9.1.0/stdlib/Stdlib.FSets.FSets.html)
 
-`Ponens.Data.FinSet` is not yet complete but is closer to complete than the Agda stdlib's `Data.Tree.AVL.Sets`.
-`FinSet` is based on the stdlib's `Data.Tree.AVL.Indexed` with more ops and proofs added as needed.
+`FinSet` is based on the stdlib's `Data.Tree.AVL.Indexed`.
 
 The following table lists intended operations needed to make `FinSet` complete and their current status.
 For most operations, *Proved* means that the op respects the meaning of the set as a `Pred`.
@@ -116,3 +115,5 @@ Because ops are proved to follow the denotation's semantics, other properties of
 | `∪-idem` | Y | `∪` is idempotent |
 | `∪-identityˡ` | Y | `∅` is `∪`'s left identity |
 | `∪-identityʳ` | Y | `∅` is `∪`'s right identity |
+
+Proofs of `FinSet`'s properties requried additional proofs about `Data.Tree.AVL.Indexed` that are missing from version 2.4 of the stdlib. These proofs characterize stdlib functions `joinˡ⁻`, `joinʳ⁻`, `castˡ`, `castʳ`, `headTail`, `initLast`, `join`, `delete`, and `toList`. Code here also adds `AVL.Indexed` functions:  `head` and `lookup->` and their proofs.
