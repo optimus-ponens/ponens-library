@@ -18,7 +18,7 @@ TODO:
   * Unary._⟨⊎⟩_ (Haskell's disjointUnion)
   * Unary._⟨⊙⟩_
   * Unary._~
-  * Unary._⟨∘⟩_ -- consider waiting until finite binary rel is implemented
+  * Unary._⟨∘⟩_ -- wait until finite binary rel is implemented
   * Unary._//_ -- This is implementable because only Cs in Q need to be considered -- consider waiting until finite binary rel is implemented
   * Unary._\\_ -- same as Unary._//_
   * Union monoid. Is there a commutative monoid?
@@ -924,7 +924,7 @@ lex-strictTotalOrder = record { isStrictTotalOrder = lex-isStrictTotalOrder }
 ⊂-strictPartialOrder = record { isStrictPartialOrder = ⊂-isStrictPartialOrder }
 
 {-
-TODO: This needs to be in its own file.
+TODO: This needs to be in another file for different elem types.
 powerSet : St → St
 powerSet t = {!!}
 ⟦powerSet⟧ : (t : St) → ⟦ powerSet t ⟧ U.≐ (_⊆ t)
