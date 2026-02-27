@@ -34,11 +34,11 @@ We attempt a complete set of operations and proofs.
 For proofs to be complete, each operation should be proved to respect its denotation's semantics.
 To judge whether the set of operations is complete, we compare operations to other libraries, including:
 
-- Agda's `Relation.Unary`. Those operations for unary `Pred` that are applicable to finite ordered sets should be included.
-- Haskell's `Data.Set`.
+- Agda's [Relation.Unary](https://agda.github.io/agda-stdlib/v2.3/Relation.Unary.html). Those operations for unary `Pred` that are applicable to finite ordered sets should be included.
+- Haskell's [Data.Set](https://hackage.haskell.org/package/containers-0.4.2.0/docs/Data-Set.html).
 - Rocq's [Stdlib.FSets.FSets](https://rocq-prover.org/doc/V9.1.0/stdlib/Stdlib.FSets.FSets.html)
 
-`FinSet` is based on the stdlib's `Data.Tree.AVL.Indexed`.
+`FinSet` wraps the stdlib's [Data.Tree.AVL.Indexed](https://agda.github.io/agda-stdlib/v2.3/Data.Tree.AVL.Indexed.html).
 
 The following table lists intended operations needed to make `FinSet` complete and their current status.
 For most operations, *Proved* means that the op respects the meaning of the set as a `Pred`.
@@ -116,4 +116,4 @@ Because ops are proved to follow the denotation's semantics, other properties of
 | `∪-identityˡ` | Y | `∅` is `∪`'s left identity |
 | `∪-identityʳ` | Y | `∅` is `∪`'s right identity |
 
-Proofs of `FinSet`'s properties requried additional proofs about `Data.Tree.AVL.Indexed` that are missing from version 2.4 of the stdlib. These proofs characterize stdlib functions `joinˡ⁻`, `joinʳ⁻`, `castˡ`, `castʳ`, `headTail`, `initLast`, `join`, `delete`, and `toList`. Code here also adds `AVL.Indexed` functions:  `head` and `lookup->` and their proofs.
+Proofs of `FinSet`'s properties requried additional proofs about [Data.Tree.AVL.Indexed](https://agda.github.io/agda-stdlib/v2.3/Data.Tree.AVL.Indexed.html) that are missing from version 2.4 of the stdlib. These proofs characterize stdlib functions `joinˡ⁻`, `joinʳ⁻`, `castˡ`, `castʳ`, `headTail`, `initLast`, `join`, `delete`, and `toList`. Code here also adds AVL ops `head` and `lookup->` and their proofs.
