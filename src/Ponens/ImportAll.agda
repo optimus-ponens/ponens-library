@@ -4,12 +4,8 @@ This is blocked on AnyWithK.Any→∈-unique
 -}
 {-# OPTIONS --with-K --safe #-}
 
-module Ponens.Test where
+module Ponens.ImportAll where
 
--- Import all files in the project to force type check of all.
--- TODO: Change this after project build setup, which should type check everything.
--- To find all the files:
--- `find -name "*.agda" | grep -v Ponens/Test.agda | sed 's/\.\//import /g' | sed 's/\//./g' | sed 's/\.agda//g'`
 import Ponens.Data.DifferenceList.Properties
 import Ponens.Data.Fin.Properties
 import Ponens.Data.FinSet

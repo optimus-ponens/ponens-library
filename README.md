@@ -20,16 +20,15 @@
 # The Ponens Agda library
 
 This is a library of Agda code with common utilities, functions, and data structures.
-
-Code here is experimental and will change.
 It will be used as part of the Ponens optimizer, a tool that solves formally specified optimization problems using proof-space exploration.
+Code here is experimental and will change.
 
 ## Contents
 
 ### Ponens.Data.FinSet
 
 This is finite set of ordered elements.
-Its primary denotation is `Pred A`, where `A` is element type.
+A set's primary denotation is `Pred A`, where `A` is its element type.
 
 We attempt a complete set of operations and proofs.
 For proofs to be complete, each operation should be proved to respect its denotation's semantics.
@@ -42,7 +41,7 @@ To judge whether the set of operations is complete, we compare operations to oth
 `Ponens.Data.FinSet` is not yet complete but is closer to complete than the Agda stdlib's `Data.Tree.AVL.Sets`.
 `FinSet` is based on the stdlib's `Data.Tree.AVL.Indexed` with more ops and proofs added as needed.
 
-The following table lists intended operations that would make the `FinSet` complete and their current status.
+The following table lists intended operations needed to make `FinSet` complete and their current status.
 For most operations, *Proved* means that the op respects the meaning of the set as a `Pred`.
 Optimal means that the implementation is asymptotically optimal given a balanced tree representation.
 
@@ -68,21 +67,21 @@ Optimal means that the implementation is asymptotically optimal given a balanced
 | `initLast` | Y | Y | Y | Split to init set, last elem |
 | `lookup->` | Y | Y | Y | Lookup closest elem greater-than given |
 | `lookup-≥` | N | | | Lookup closest elem greater-than-or-eq given |
-| `lookup-<` | N | | | Lookup closest less-than given |
-| `lookup-≤` | N | | | Lookup closest less-than-or-eq given |
+| `lookup-<` | N | | | Lookup closest elem less-than given |
+| `lookup-≤` | N | | | Lookup closest elem less-than-or-eq given |
 | `range-exclusive` | Y | Y | N | Select range, excluding low and high |
 | `range` | Y | Y | N | Select range, including low, excluding high |
 | `split` | Y | Y | N | Split on key to to pair of sets |
 | `∪` | Y | Y | N | Set union |
 | `∩` | Y | Y | N | Set intersection |
 | `∖` | Y | Y | N | Set difference |
+| `symmetricDifference` | Y | Y | N | Set symmetric difference |
 | `Empty?` | Y | Y | Y | The set is empty |
 | `Satisfiable?` | Y | Y | Y | The set is satisfiable |
-| `symmetricDifference` | Y | Y | N | Set symmetric difference |
 | `⊆?` | Y | Y | N | Is subset |
 | `⊂?` | Y | Y | N | Is strict subset |
 | `≐?` | Y | Y | N | Sets have same elements |
-| `≬` | Y | Y | N | Sets share an element |
+| `≬?` | Y | Y | N | Sets share an element |
 | `⟨×⟩` | N | | | Cartesian product |
 | `⟨⊎⟩` | N | | | Disjoint union |
 | `⟨⊙⟩` | N | | | Sum over two elements |
