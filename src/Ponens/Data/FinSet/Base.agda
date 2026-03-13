@@ -11,6 +11,13 @@ This means:
 * We can use the Relation.Unary.Algebra.
 
 TODO:
+* List possible denotations
+  literal, ..., StrictSorted, ..., Pred Key
+  Set
+  StrictSorted
+  some finite set
+  Fin (size t) -- no because keys were lost
+  Decidable Pred
 * More functions from other libraries:
   The union of Relation.Unary and Haskell's Data.Set are pretty comprehensive.
   * powerSet (Haskell)
@@ -170,6 +177,7 @@ _∈_ k = Any (k ≈_)
 _∉_ : Key → St → Set ℓa
 _∉_ k t = ¬ (k ∈ t)
 -- Note: Use of any? would be simpler but would be O(n) time instead of O(log n) time.
+-- This is the member function.
 _∈?_ : (k : Key) → (t : St) → Dec (k ∈ t)
 _∈?_ k t with Indexed.lookup (tree t) k ⊥⁺<[ k ]<⊤⁺
             | lookup⁻ (tree t) k tt (⊥⁺<[ k ]<⊤⁺)
@@ -177,13 +185,14 @@ _∈?_ k t with Indexed.lookup (tree t) k ⊥⁺<[ k ]<⊤⁺
 ... | just tt | p⁻ | _ = yes (Any.map (λ{ (k′≈k , _) → Eq.sym k′≈k }) (p⁻ ≡.refl))
 ... | nothing | _ | p⁺ = no (p⁺ ≡.refl)
 
--- Meaning of an St
+-- Meaning/denotation/interpretation of an St
 ⟦_⟧ : St → Pred Key ℓa
-⟦_⟧ t k = k ∈ t
+⟦ t ⟧ k = k ∈ t
 ⟦_⟧? : ∀ t → U.Decidable ⟦ t ⟧
 ⟦_⟧? t = _∈? t
 
 -- Alternate meaining of an St
+-- Note: This is the same as (Unary.Satisfiable ⟦ t ⟧)
 ⟦_⟧-Keys : St → Set ℓa
 ⟦_⟧-Keys t = Σ Key ⟦ t ⟧
 ⟦_⟧-Keys-setoid : St → Setoid ℓa ℓa

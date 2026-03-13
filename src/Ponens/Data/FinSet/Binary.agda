@@ -29,8 +29,8 @@ module Ponens.Data.FinSet.Binary
 
 import Data.List as List
 import Data.List.Membership.Setoid.Properties as ListMem
-open import Data.Product using (_×_; _,_; proj₁; proj₂; ∃)
-open import Function using (_∘_)
+open import Data.Product using (_×_; _,_; proj₁; proj₂; ∃; Σ-syntax)
+open import Function using (_∘_; _on_; Inverseˡ)
 open import Level using (Level; _⊔_)
 open import Ponens.Data.FinSet using (St; ⟦_⟧; ⟦_⟧-Keys; ⟦_⟧-Keys-setoid; toList; ⟦toList⟧; fromList; ⟦fromList⟧; ∈-resp-≈)
 open import Ponens.Relation.Binary.Align using (alignStrictTotalOrder)
@@ -75,7 +75,9 @@ St2 = St sto2
 
 -- TODO: Maybe use (f : setoid1 Function.Bundles.→ₛ setoid2) instead of (f : Key1 → Key2).
 --       Then below (f Preserves _≈1_ ⟶ _≈2_) properties might not be needed.
-map : (f : Key1 → Key2) → St1 → St2
+--       This is called `Func` in stdlib.
+--       Further, it might be simpler for "Key1" to mean the setoid rather than the carrier.
+map : (Key1 → Key2) → St1 → St2
 map f = fromList sto2 ∘ List.map f ∘ toList sto1
 -- Note that `map` is covariant and Relation.Unary.⊢ is contravariant.
 ⟦map⟧⁺ : (f : Key1 → Key2) → f Preserves _≈1_ ⟶ _≈2_ → (t : St1) →
@@ -99,7 +101,7 @@ map f = fromList sto2 ∘ List.map f ∘ toList sto1
   in k1 , proj₁ (⟦toList⟧ _ _) k1∈list , eq
 ⟦map⟧ : (f : Key1 → Key2) → f Preserves _≈1_ ⟶ _≈2_ → (t : St1) →
         ⟦ map f t ⟧2 U.≐
-        (λ k2 → ∃ λ k1 → ⟦ t ⟧1 k1 × k2 ≈2 f k1)
+        (λ k2 → ∃ λ k1 → (⟦ t ⟧1 k1) × (k2 ≈2 f k1))
 ⟦map⟧ f pres t =
     (λ {k2} → ⟦map⟧⁻ f t k2)
   , (λ{ {k2} (k1 , k1∈t , eq) →
@@ -111,7 +113,7 @@ map-inv f t (k2 , k2∈tree) =
   let k1 , k1∈t , _ = ⟦map⟧⁻ f t k2 k2∈tree
   in k1 , k1∈t
 {-
-This might be a more natural ⟦map⟧ because map is covariant.
+-- This might be a more natural ⟦map⟧ because map is covariant.
 map-f-inv : (f : Key1 → Key2) → (pres : f Preserves _≈1_ ⟶ _≈2_ ) → (t : St1) →
             Inverseˡ (_≈1_ on proj₁) (_≈2_ on proj₁)
                      (map-f f pres t)
